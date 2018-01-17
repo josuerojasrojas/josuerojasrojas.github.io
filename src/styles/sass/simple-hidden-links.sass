@@ -1,0 +1,28 @@
+.hidden-links-wrapper
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  .link-wrapper
+    overflow-y: hidden
+    display: flex
+    flex-wrap: wrap
+    width: 300px
+    justify-content: center
+    transition: max-height 400ms
+  .icon-border
+    border-radius: 100%
+    margin: 3px
+    cursor: pointer
+    width: 30px
+    height: 30px
+    display: flex
+    justify-content: center
+    align-items: center
+    .icon
+      width: 15px
+      height: 10px
+      mask: url('../../images/svg/chevron-down.svg') no-repeat 50% 50%
+      -webkit-mask: url('../../images/svg/chevron-down.svg') no-repeat 50% 50%
+      mask-size: cover
+      transition: transform 400ms

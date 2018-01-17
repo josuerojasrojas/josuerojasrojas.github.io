@@ -39,6 +39,13 @@ export default class SimpleCard extends Component {
     return(
       <div className='card-wrapper'>
         <div className='card'>
+          <div
+          className='image'
+          style={{backgroundImage: 'url(' + this.props.profile_image +')'}}></div>
+          <div>
+            <div className='title'>{this.props.title}</div>
+            <div className='sub-title'>{this.props.sub_title}</div>
+          </div>
           {socialbar}
           <HiddenLinks
             links={{'Projects': '/projects','Resume': '/projects'}}

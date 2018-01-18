@@ -95,6 +95,7 @@ export default class HiddenLinks extends Component{
         maxHeight: this.state.isActive ? this.state.maxHeight +'px' : '0px',
       },
       icon_border: {
+        marginTop: this.state.isActive ? '7px' : '0px',
         border: '1px solid ' + icon_color,
       },
       icon: {

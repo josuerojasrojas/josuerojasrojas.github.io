@@ -63,6 +63,7 @@ export default class SimpleCard extends Component {
   }
   render(){
     const socialbar = this.makeSocialBar(this.props.social, this.props.main_color, this.props.hover_color);
+    // TODO: links shoud be a prop
     return(
       <div className='card-wrapper'>
         <div className='card'>

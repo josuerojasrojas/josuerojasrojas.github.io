@@ -98,7 +98,7 @@ export default class HiddenLinks extends Component{
         border: '1px solid ' + icon_color,
       },
       icon: {
-        marginTop: this.state.isActive ? '-2px': '3px',
+        marginTop: this.state.isActive ? '-3px': '3px',
         backgroundColor: icon_color,
         transform: this.state.isActive ? 'rotate(180deg)': 'rotate(0deg)',
       }

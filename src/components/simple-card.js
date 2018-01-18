@@ -40,7 +40,7 @@ class SimpleFooter extends Component{
   render(){
     const color = this.state.hover ? this.props.hover_color : this.props.main_color;
     return(
-      <footer> Developed by © <a style={{color: color}} href="http://modulos-design.com" onMouseEnter={() => this.toggleHover(true)} onMouseLeave={() => this.toggleHover(false)}> Modulos-Design</a></footer>
+      <footer> <a style={{color: color}} href="https://github.com/josuerojasrojas/josuerojasrojas.github.io-react" onMouseEnter={() => this.toggleHover(true)} onMouseLeave={() => this.toggleHover(false)}> Source Here</a></footer>
     )
   }
 }
@@ -68,23 +68,22 @@ export default class SimpleCard extends Component {
       <div className='card-wrapper'>
         <div className='card'>
           <div
-          className='image'
-          style={{backgroundImage: 'url(' + this.props.profile_image +')'}}></div>
+            className='image'
+            style={{backgroundImage: 'url(' + this.props.profile_image +')'}}>
+          </div>
           <div>
             <div className='title'>{this.props.title}</div>
             <div className='sub-title'>{this.props.sub_title}</div>
           </div>
           {socialbar}
           <HiddenLinks
-            links={{'Projects': '/projects','Resume': '/projects'}}
+            links={{'Projects': '/projects','Resume': 'https://docs.google.com/viewerng/viewer?url=https://docs.google.com/document/d/19yTZrEzGzS_YKJ_hjlGshuqt8aOhCobtVCevYopELXI/export?format=pdf'}}
             main_color={this.props.main_color}
-            hover_color={this.props.hover_color}
-          />
+            hover_color={this.props.hover_color} />
         </div>
         <SimpleFooter
           main_color={this.props.main_color}
-          hover_color={this.props.hover_color}
-        />
+          hover_color={this.props.hover_color} />
       </div>
     )
   }

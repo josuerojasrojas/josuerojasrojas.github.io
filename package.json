@@ -14,9 +14,9 @@
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-js; echo '---\npermalink: /\n---\n' | cat - build/index.html > temp && mv temp build/index.html",
+    "build": "npm-run-all build-css build-js; echo '---\npermalink: /\n---\n' | cat - build/index.html > temp && mv temp build/index.html; rm -rf ../josuerojasrojas.github.io/build; mv build/ ../josuerojasrojas.github.io/",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "http://josuerz.xyz/josuerojasrojas.github.io-react/build"
+  "homepage": "http://josuerz.xyz/build"
 }

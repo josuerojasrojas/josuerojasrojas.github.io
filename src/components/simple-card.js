@@ -1,3 +1,10 @@
+// props
+// social: object of <Social Site>: <Link of site>
+// hover_color: color when links are hovered
+// main_color:  main color (text, links, icons, etc)
+// profile_image: src for profile image
+// title: title of card
+// sub_title: subt title of card
 // this component is a simple card that....
 import React, { Component } from 'react';
 // things the card uses

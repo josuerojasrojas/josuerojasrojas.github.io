@@ -18,7 +18,7 @@ class App extends Component {
           }
           hover_color='#05fbff'
           main_color='#989DA1'
-          profile_image='https://avatars0.githubusercontent.com/u/10749061?v=4'
+          profile_image='https://avatars0.githubusercontent.com/u/10749061'
           title='Josue Rojas'
           sub_title='Software Developer / Wonderer'
         />

@@ -15,9 +15,6 @@ export default class Round_Icon extends Component {
   constructor(props){
     super(props);
     this.state = {
-      color: props.color,
-      main_color: props.main_color,
-      hover_color: props.hover_color,
       hover: false,
     }
     this.toggleHover = this.toggleHover.bind(this);
@@ -29,7 +26,7 @@ export default class Round_Icon extends Component {
 
   render(){
     // console.log(this.props.main_color, this.props.hover_color);
-    const color = this.state.hover ? this.state.hover_color : this.state.main_color;
+    const color = this.state.hover ? this.props.hover_color : this.props.main_color;
     const style = {
       border: {
         border: '1px solid '+ color,

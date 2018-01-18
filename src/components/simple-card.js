@@ -25,6 +25,26 @@ const icons = {
   'Github': Github
 }
 
+// needs to be more generic but oh well.....
+class SimpleFooter extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      hover: false,
+    }
+    this.toggleHover = this.toggleHover.bind(this);
+  }
+  toggleHover(isHover){
+    this.setState({hover: isHover});
+  }
+  render(){
+    const color = this.state.hover ? this.props.hover_color : this.props.main_color;
+    return(
+      <footer> Developed by © <a style={{color: color}} href="http://modulos-design.com" onMouseEnter={() => this.toggleHover(true)} onMouseLeave={() => this.toggleHover(false)}> Modulos-Design</a></footer>
+    )
+  }
+}
+
 export default class SimpleCard extends Component {
   makeSocialBar(sociality ,main_color, hover_color){
     let socialBar = [];
@@ -60,6 +80,10 @@ export default class SimpleCard extends Component {
             hover_color={this.props.hover_color}
           />
         </div>
+        <SimpleFooter
+          main_color={this.props.main_color}
+          hover_color={this.props.hover_color}
+        />
       </div>
     )
   }

@@ -39,7 +39,8 @@ class Link extends Component{
     }
     return(
       <a
-        style={styles.link_button}href={this.props.link}
+        style={styles.link_button}
+        href={this.props.link}
         onMouseEnter={() => this.toggleHover(true)}
         onMouseLeave={() => this.toggleHover(false)}
       >
@@ -54,7 +55,7 @@ export default class HiddenLinks extends Component{
     super(props);
     this.state = {
       isActive: false,
-      maxHeight: Math.ceil(Object.keys(this.props.links).length / 2) * 40,
+      maxHeight: Math.ceil(Object.keys(this.props.links).length / 2) * 50,
       iconHover: false,
     }
     this.handleClick = this.handleClick.bind(this);
@@ -68,12 +69,12 @@ export default class HiddenLinks extends Component{
     })
   }
 
-  makeHiddenLinks(link_pair, hover_color, main_color){
+  makeHiddenLinks(links_obj, hover_color, main_color){
     let links = [];
-    for(let key in this.props.links){
+    for(let key in links_obj){
       links.push(
         <Link
-          link={links[key]}
+          link={links_obj[key]}
           text={key}
           hover_color={hover_color}
           main_color={main_color}
@@ -102,7 +103,7 @@ export default class HiddenLinks extends Component{
         transform: this.state.isActive ? 'rotate(180deg)': 'rotate(0deg)',
       }
     }
-    const links = this.makeHiddenLinks(styles.link_pair, this.props.hover_color, this.props.main_color);
+    const links = this.makeHiddenLinks(this.props.links, this.props.hover_color, this.props.main_color);
     return(
       <div className='hidden-links-wrapper'>
         <div

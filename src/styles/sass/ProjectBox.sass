@@ -1,0 +1,59 @@
+@import 'sizes.sass'
+@import 'mixins.sass'
+
+// colors
+.Java
+  background-color: #b07219
+.Shell
+  background-color: #89e051
+.Python
+  background-color: #3572A5
+.JavaScript
+  background-color: #f1e05a
+.HTML
+  background-color: #e34c26
+.CSS
+  background-color: #563d7c
+.CoffeeScript
+  background-color: #244776
+
+// display: flex;
+// padding-top: 20px;
+// flex-wrap: wrap;
+
+.project-box
+  +clearfix
+  padding-right: 15px
+  padding-left: 15px
+  background-color: rgba(31, 31, 31, 0.6)
+  float: left
+  width: 90%
+  margin: 0 5% 20px
+  color: #989da1
+  letter-spacing: .05rem
+  +medium-devices
+    text-align: center
+    width: 40%
+    margin: 0 5% 20px
+  +large-devices
+    width: 25%
+    margin: 0 4.1666% 20px
+  .languages
+    +medium-devices
+      display: table
+    margin: auto
+    .language-circle
+      border-radius: 100%
+      display: inline-block
+      width: 10px
+      height: 10px
+      margin: 2px
+      border-radius: 50%
+  .title
+    font-size: 1.25rem
+    font-weight: 400
+    letter-spacing: .1rem
+    // +medium-devices
+    //   text-align: center
+  .date
+    font-size: .75rem

@@ -1,4 +1,39 @@
+@import 'sizes.sass'
+@import 'mixins.sass'
+
 .projects-view
-  display: flex
-  flex-wrap: wrap
   padding-top: 20px
+  display: flex
+  flex-direction: column
+  align-items: center
+  .search-bar
+    width: 50%
+    outline: none
+    min-height: 30px
+    margin-top: 0
+    outline: none
+    border: 1px solid rgba(233, 233, 233, 0.6)
+    box-shadow: 0 0 2px rgba(233, 233, 233, 0.6)
+    background-color: rgba(177, 177, 177, 0.11)
+    transition: 400ms
+    color: white
+    font-size: .9rem
+    &:focus
+      border: 1px solid #05fbff
+      box-shadow: 0 0 2px #05fbff
+      background-color: rgba(5, 251, 255, 0.09)
+  .projects-wrapper
+    display: flex
+    flex-wrap: wrap
+    padding-top: 20px
+    .project-box
+      // +large-devices
+      //   &:nth-child(3n+1)
+      //     margin-left: 6.25%
+      //     margin-right: 3.125%
+      //   &:nth-child(3n+2)
+      //     margin-left: 3.125%
+      //     margin-right: 3.125%
+      //   &:nth-child(3n+3)
+      //     margin-left: 3.125%
+      //     margin-right: 6.25%

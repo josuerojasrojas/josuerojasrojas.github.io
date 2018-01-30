@@ -4,33 +4,52 @@
 // colors
 .Java
   background-color: #b07219
+  order: 8
 .Shell
   background-color: #89e051
+  order: 3
 .Python
   background-color: #3572A5
+  order: 4
 .JavaScript
   background-color: #f1e05a
+  order: 2
 .HTML
   background-color: #e34c26
+  order: 7
 .CSS
   background-color: #563d7c
+  order: 6
 .CoffeeScript
   background-color: #244776
+  order: 5
 
 // display: flex;
 // padding-top: 20px;
 // flex-wrap: wrap;
 
 .project-box
-  +clearfix
+  // +clearfix
   padding-right: 15px
   padding-left: 15px
-  background-color: rgba(31, 31, 31, 0.6)
+  padding-bottom: 52px
+  padding-top: 5px
+  background-color: rgba(31, 31, 31, .6)
+  // border: 1px solid rgba(31,31,31,.8)
   float: left
   width: 90%
   margin: 0 5% 20px
   color: #989da1
   letter-spacing: .05rem
+  transition: 400ms
+  font-weight: 200
+  position: relative
+  // &:.JavaScript
+  //   background-color: rgba(241, 224, 90, 0.11)
+  //   order: initial
+  &:hover
+    // border: 1px solid #05fbff
+    cursor: pointer
   +medium-devices
     text-align: center
     width: 40%
@@ -40,20 +59,32 @@
     margin: 0 4.1666% 20px
   .languages
     +medium-devices
-      display: table
-    margin: auto
+      display: flex
+      justify-content: center
+    // margin: auto
     .language-circle
       border-radius: 100%
       display: inline-block
       width: 10px
       height: 10px
       margin: 2px
-      border-radius: 50%
   .title
-    font-size: 1.25rem
+    font-size: 1.2rem
     font-weight: 400
     letter-spacing: .1rem
     // +medium-devices
     //   text-align: center
   .date
     font-size: .75rem
+  .description
+    font-size: .95rem
+    margin-bottom: auto
+  .icon-border
+    // margin-top: auto
+    // margin: auto
+    bottom: 10px
+    left: calc(50% - 16px)
+    position: absolute
+    // float: left
+    // position: absolute
+    // text-align: justify

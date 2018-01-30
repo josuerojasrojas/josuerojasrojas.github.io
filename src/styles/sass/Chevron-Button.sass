@@ -1,0 +1,23 @@
+// colors should be in a default sass as a variable
+
+.icon-border
+  border-radius: 100%
+  cursor: pointer
+  width: 32px
+  height: 32px
+  display: flex
+  justify-content: center
+  align-items: center
+  border: 1px solid  rgb(152, 157, 161)
+  &:hover
+    border: 1px solid #05fbff
+    .icon
+      background-color: #05fbff
+  .icon
+    width: 20px
+    height: 15px
+    mask: url('../../images/svg/chevron-down.svg') no-repeat 50% 50%
+    -webkit-mask: url('../../images/svg/chevron-down.svg') no-repeat 50% 50%
+    mask-size: cover
+    transition: 400ms
+    background-color: rgb(152, 157, 161)

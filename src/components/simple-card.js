@@ -37,6 +37,9 @@ class SimpleFooter extends Component{
   toggleHover(isHover){
     this.setState({hover: isHover});
   }
+  componentDidMount(){
+    document.title = "Josue's Porfolio"
+  }
   render(){
     const color = this.state.hover ? this.props.hover_color : this.props.main_color;
     return(

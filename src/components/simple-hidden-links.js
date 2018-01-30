@@ -4,6 +4,7 @@
 // hover_color: color when hover
 
 import React, { Component } from 'react';
+import ChevronButton from './Chevron-Button'
 import '../styles/sass/simple-hidden-links.css';
 
 class Link extends Component{
@@ -94,15 +95,6 @@ export default class HiddenLinks extends Component{
       links_wrapper: {
         maxHeight: this.state.isActive ? this.state.maxHeight +'px' : '0px',
       },
-      icon_border: {
-        marginTop: this.state.isActive ? '7px' : '0px',
-        border: '1px solid ' + icon_color,
-      },
-      icon: {
-        marginTop: this.state.isActive ? '-3px': '3px',
-        backgroundColor: icon_color,
-        transform: this.state.isActive ? 'rotate(180deg)': 'rotate(0deg)',
-      }
     }
     const links = this.makeHiddenLinks(this.props.links, this.props.hover_color, this.props.main_color);
     return(
@@ -112,14 +104,9 @@ export default class HiddenLinks extends Component{
           style={styles.links_wrapper} >
           {links}
         </div>
-        <div
-          className='icon-border'
-          style={styles.icon_border}
-          onMouseEnter={() => this.handleIconHover(true)}
-          onMouseLeave={() => this.handleIconHover(false)}
-          onClick={this.handleClick} >
-          <div className='icon' style={styles.icon}></div>
-        </div>
+        <ChevronButton
+          onClick={this.handleClick}
+          isActive={this.state.isActive}/>
       </div>
     )
   }

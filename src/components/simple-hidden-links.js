@@ -4,52 +4,10 @@
 // hover_color: color when hover
 
 import React, { Component } from 'react';
-import ChevronButton from './Chevron-Button'
+import ChevronButton from './Chevron-Button';
+import LinkButton from './Link-Button';
 import '../styles/sass/simple-hidden-links.css';
 
-class Link extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      hover: false,
-    }
-    this.toggleHover = this.toggleHover.bind(this);
-  }
-  toggleHover(isHover){
-    this.setState({hover: isHover});
-  }
-  render(){
-    const color = this.state.hover ? this.props.hover_color : this.props.main_color;
-    const styles = {
-      link_button: {
-        transition: '400ms',
-        borderRadius: '5px',
-        border: '1px solid ' + color,
-        padding: '5px 7px',
-        width: '90px',
-        margin: '3px 5px',
-        textDecoration: 'none',
-        cursor: 'pointer',
-        textAlign: 'center',
-      },
-      link_text: {
-        transition: '800ms',
-        color: color,
-        zIndex: '2'
-      }
-    }
-    return(
-      <a
-        style={styles.link_button}
-        href={this.props.link}
-        onMouseEnter={() => this.toggleHover(true)}
-        onMouseLeave={() => this.toggleHover(false)}
-      >
-        <div style={styles.link_text}>{this.props.text}</div>
-      </a>
-    )
-  }
-}
 
 export default class HiddenLinks extends Component{
   constructor(props){
@@ -74,13 +32,10 @@ export default class HiddenLinks extends Component{
     let links = [];
     for(let key in links_obj){
       links.push(
-        <Link
+        <LinkButton
           link={links_obj[key]}
-          text={key}
-          hover_color={hover_color}
-          main_color={main_color}
-        />
-      )
+          text={key}/>
+        )
     }
     return links;
   }

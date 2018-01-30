@@ -1,4 +1,4 @@
-// colors should be in a default sass as a variable
+@import Colors.sass
 
 .icon-border
   border-radius: 100%
@@ -8,16 +8,16 @@
   display: flex
   justify-content: center
   align-items: center
-  border: 1px solid  rgb(152, 157, 161)
+  border: 1px solid  $normal-color
   &:hover
-    border: 1px solid #05fbff
+    border: 1px solid $hover-color
     .icon
-      background-color: #05fbff
+      background-color: $hover-color
   .icon
     width: 20px
-    height: 15px
+    height: 32px
     mask: url('../../images/svg/chevron-down.svg') no-repeat 50% 50%
     -webkit-mask: url('../../images/svg/chevron-down.svg') no-repeat 50% 50%
     mask-size: cover
     transition: 400ms
-    background-color: rgb(152, 157, 161)
+    background-color: $normal-color

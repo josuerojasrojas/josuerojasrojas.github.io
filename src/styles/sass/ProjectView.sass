@@ -6,10 +6,34 @@
   display: flex
   flex-direction: column
   align-items: center
+  min-width: 100vw
+  &.active-menu
+    position: fixed
+  .menu-stuff
+    width: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    .link-button
+      margin-bottom: 10px
+  .arrow-left
+    width: 30px
+    height: 48px
+    margin: 7px
+    mask: url('../../images/svg/arrow-left.svg') no-repeat 50% 50%
+    -webkit-mask: url('../../images/svg/arrow-left.svg') no-repeat 50% 50%
+    mask-size: cover
+    -webkit-marsk-size: cover
+    transition: color 400ms
+    background-color: rgb(152, 157, 161)
+    cursor: pointer
+    transition: 400ms
+    &:hover
+      background-color: #05fbff
   .search-bar
-    width: 50%
+    width: 100%
     outline: none
-    min-height: 30px
+    height: 30px
     margin-top: 0
     outline: none
     border: 1px solid rgba(233, 233, 233, 0.6)

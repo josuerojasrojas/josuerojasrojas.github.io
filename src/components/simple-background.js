@@ -5,11 +5,14 @@ import '../styles/sass/simple-background.css';
 
 export default class SimpleBackground extends Component {
   render(){
+    const style = {
+      backgroundImage: 'url('+ this.props.backgroundImage + ')',
+    }
     return(
-      <div className='simple-background-wrapper'>
+      <div className={this.props.active ? 'simple-background-wrapper active' : 'simple-background-wrapper'}>
         <div
           className='background'
-          style={{backgroundImage: 'url('+ this.props.backgroundImage + ')'}}></div>
+          style={style}></div>
         <div className='shade'></div>
       </div>
     )

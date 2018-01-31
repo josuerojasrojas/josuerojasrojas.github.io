@@ -1,0 +1,118 @@
+@import sizes.sass
+@import mixins.sass
+@import Colors.sass
+
+// colors
+.Java
+  background-color: #b07219
+.Shell
+  background-color: #89e051
+.Python
+  background-color: #3572A5
+.JavaScript
+  background-color: #f1e05a
+.HTML
+  background-color: #e34c26
+.CSS
+  background-color: #563d7c
+.CoffeeScript
+  background-color: #244776
+
+.projects-view
+  padding-top: 20px
+  display: flex
+  flex-direction: column
+  align-items: center
+  min-width: 100vw
+  &.active-menu
+    .projects-wrapper
+      position: fixed
+      padding-top: 72px
+      left: 0
+      top: 0
+  .home
+    width: 48px
+    height: 48px
+    margin: 7px
+    mask: url('../../images/svg/home.svg') no-repeat 50% 50%
+    -webkit-mask: url('../../images/svg/home.svg') no-repeat 50% 50%
+    mask-size: cover
+    -webkit-marsk-size: cover
+    transition: color 400ms
+    background-color: rgb(152, 157, 161)
+    cursor: pointer
+    transition: 400ms
+    &:hover
+      background-color: #05fbff
+
+  .menu-stuff
+    width: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    .link-button
+      margin-bottom: 10px
+  // .arrow-left
+  //   width: 30px
+  //   height: 48px
+  //   margin: 7px
+  //   mask: url('../../images/svg/arrow-left.svg') no-repeat 50% 50%
+  //   -webkit-mask: url('../../images/svg/arrow-left.svg') no-repeat 50% 50%
+  //   mask-size: cover
+  //   -webkit-marsk-size: cover
+  //   transition: color 400ms
+  //   background-color: rgb(152, 157, 161)
+  //   cursor: pointer
+  //   transition: 400ms
+  //   &:hover
+  //     background-color: #05fbff
+  .search-bar
+    width: 100%
+    outline: none
+    height: 30px
+    margin-top: 0
+    outline: none
+    border: 1px solid rgba(233, 233, 233, 0.6)
+    box-shadow: 0 0 2px rgba(233, 233, 233, 0.6)
+    background-color: rgba(177, 177, 177, 0.11)
+    transition: 400ms
+    color: white
+    font-size: .9rem
+    &:focus
+      border: 1px solid $hover-color
+      box-shadow: 0 0 2px $hover-color
+      background-color: rgba(5, 251, 255, 0.09)
+  .language-search
+    color: $normal-color
+    font-size: 1.2rem
+    display: flex
+    align-items: center
+    justify-content: space-between
+    width: 100%
+    cursor: pointer
+    margin-top: 5px
+    padding-left: 7px
+    padding-right: 7px
+    // justify-content: space-between
+    &:hover
+      color: $hover-color
+    .language-circle
+      width: 20px
+      height: 20px
+      border-radius: 100%
+      display: inline-block
+  .projects-wrapper
+    display: flex
+    flex-wrap: wrap
+    padding-top: 20px
+    .project-box
+      +large-devices
+        &:nth-child(3n+1)
+          margin-left: 6.25%
+          margin-right: 3.125%
+        &:nth-child(3n+2)
+          margin-left: 3.125%
+          margin-right: 3.125%
+        &:nth-child(3n+3)
+          margin-left: 3.125%
+          margin-right: 6.25%

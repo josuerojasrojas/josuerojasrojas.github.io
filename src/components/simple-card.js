@@ -37,6 +37,9 @@ class SimpleFooter extends Component{
   toggleHover(isHover){
     this.setState({hover: isHover});
   }
+  componentDidMount(){
+    document.title = "Josue's Porfolio"
+  }
   render(){
     const color = this.state.hover ? this.props.hover_color : this.props.main_color;
     return(
@@ -77,7 +80,7 @@ export default class SimpleCard extends Component {
           </div>
           {socialbar}
           <HiddenLinks
-            links={{'Projects': '/projects','Resume': 'https://docs.google.com/viewerng/viewer?url=https://docs.google.com/document/d/19yTZrEzGzS_YKJ_hjlGshuqt8aOhCobtVCevYopELXI/export?format=pdf'}}
+            links={{'Projects': '/#projects','Resume': 'https://docs.google.com/viewerng/viewer?url=https://docs.google.com/document/d/19yTZrEzGzS_YKJ_hjlGshuqt8aOhCobtVCevYopELXI/export?format=pdf'}}
             main_color={this.props.main_color}
             hover_color={this.props.hover_color} />
         </div>

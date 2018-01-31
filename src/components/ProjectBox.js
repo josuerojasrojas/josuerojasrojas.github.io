@@ -46,10 +46,12 @@ export default class ProjectBox extends Component{
     return langCir;
   }
 
-  activeBox(){
+  activeBox(e){
     this.setState({
       showing: !this.state.showing,
     })
+    // e.stopPropagation();
+    // e.preventPropagation();
   }
 
   render(){

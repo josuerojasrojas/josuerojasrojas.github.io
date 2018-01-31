@@ -14,7 +14,7 @@ export default class ChevronButton extends Component{
     }
     return(
       <div
-        className='icon-border'
+        className='icon-border chevron-down'
         style={styles.icon_border}
         onClick={this.props.onClick} >
         <div className='icon' style={styles.icon}></div>

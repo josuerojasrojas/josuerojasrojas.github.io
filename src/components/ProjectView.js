@@ -11,13 +11,37 @@ class SearchBar extends Component{
   constructor(props){
     super(props);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
   handleSearch(event){
     this.props.changeSearch(event);
   }
+  // https://stackoverflow.com/questions/31272207/to-call-onchange-event-after-pressing-enter-key
+  handleKeyPress(e){
+    if (e.key === 'Enter') {
+      this.props.handleEnterPress();
+    }
+  }
   render(){
     return(
-      <input className='search-bar' type='text' placeholder='Search Bar' onChange={this.handleSearch} value={this.props.value}/>
+      <input className='search-bar' type='text' placeholder='Search Bar' onChange={this.handleSearch} value={this.props.value} onKeyPress={this.handleKeyPress}/>
+    )
+  }
+}
+
+class LanguageSearchButton extends Component{
+  constructor(props){
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick(){
+    this.props.handleClick(this.props.language);
+  }
+  render(){
+    return(
+      <div className='language-search' onClick={this.handleClick}>
+        {this.props.language} <div className={'language-circle ' + this.props.language}></div>
+      </div>
     )
   }
 }
@@ -36,6 +60,7 @@ export default class ProjectView extends Component{
     this.addProjectBox = this.addProjectBox.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.menuClick = this.menuClick.bind(this);
+    this.handleLanguageClick = this.handleLanguageClick.bind(this);
   }
 
   componentDidMount(){
@@ -60,7 +85,8 @@ export default class ProjectView extends Component{
         title={project['repo_name']}
         date={project['created']}
         description={project['description']}
-      />
+        url={project['url']}
+        projectLink={project['projectLink']}/>
     );
     const view_project = project_array.slice();
     this.setState({
@@ -71,13 +97,14 @@ export default class ProjectView extends Component{
   }
 
   // need better search
-  handleSearch(event){
+  handleSearch(event, exact_match=false){
     const view_project = this.state.view_project.slice();
-    let current = 0;
     let added = false;
+    console.log(event)
     for(let i = 0; i < all_projects['repos'].length; i++){
       for(let lang of all_projects['repos'][i]['languagesList']){
-        if(lang.toLowerCase().includes(event.target.value.toLowerCase())){
+        const search_check = exact_match ? lang.toLowerCase() === event.target.value.toLowerCase() : lang.toLowerCase().includes(event.target.value.toLowerCase());
+        if(search_check){
          view_project[i] = this.state.project_array[i];
          added = true;
          break;
@@ -98,11 +125,35 @@ export default class ProjectView extends Component{
     this.setState({menuActive: !this.state.menuActive})
   }
 
+  makeLanguageSearchButtons(){
+    const langSearch = [];
+    for(let lang of all_projects['languages']){
+      langSearch.push(<LanguageSearchButton
+        language={lang}
+        handleClick={this.handleLanguageClick}/>);
+    }
+    return langSearch;
+  }
+
+  handleLanguageClick(language){
+
+    this.handleSearch({target:{value:language}}, true);
+    this.setState({
+      menuActive: false,
+    })
+  }
+
+
   render(){
+    // <LinkButton link='/#' text='Home'/>
     const menuStuff = (
       <div className='menu-stuff'>
-        <LinkButton link='/#' text='Home'/>
-        <SearchBar changeSearch={this.handleSearch} value={this.state.search}/>
+        <a href='/#'><div className='home'></div></a>
+        <SearchBar
+          handleEnterPress={this.menuClick}
+          changeSearch={this.handleSearch}
+          value={this.state.search}/>
+        {this.makeLanguageSearchButtons()}
       </div>)
     return (
       <div className={'projects-view ' + (this.state.menuActive ? 'active-menu' : '')}>

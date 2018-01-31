@@ -45,7 +45,6 @@ export default class HiddenLinks extends Component{
   }
 
   render(){
-    const icon_color = this.state.iconHover ? this.props.hover_color : this.props.main_color;
     const styles = {
       links_wrapper: {
         maxHeight: this.state.isActive ? this.state.maxHeight +'px' : '0px',

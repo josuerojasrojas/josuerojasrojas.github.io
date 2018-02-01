@@ -100,7 +100,6 @@ export default class ProjectView extends Component{
   handleSearch(event, exact_match=false){
     const view_project = this.state.view_project.slice();
     let added = false;
-    console.log(event)
     for(let i = 0; i < all_projects['repos'].length; i++){
       for(let lang of all_projects['repos'][i]['languagesList']){
         const search_check = exact_match ? lang.toLowerCase() === event.target.value.toLowerCase() : lang.toLowerCase().includes(event.target.value.toLowerCase());
@@ -148,12 +147,13 @@ export default class ProjectView extends Component{
     // <LinkButton link='/#' text='Home'/>
     const menuStuff = (
       <div className='menu-stuff'>
-        <a href='/#'><div className='home'></div></a>
         <SearchBar
           handleEnterPress={this.menuClick}
           changeSearch={this.handleSearch}
           value={this.state.search}/>
-        {this.makeLanguageSearchButtons()}
+        <div className='languages-wrapper'>
+          {this.makeLanguageSearchButtons()}
+        </div>
       </div>)
     return (
       <div className={'projects-view ' + (this.state.menuActive ? 'active-menu' : '')}>

@@ -5,7 +5,8 @@ export default class HamburgerMenu extends Component{
   render(){
     const activeClass = this.props.active ? 'active' : '';
     return(
-      <div>
+      <div className='nav'>
+        <a href='/#'><div className='home'></div></a>
         <div className={'hamburger-menu ' + activeClass} onClick={this.props.onClick}>
           <div className="line top"></div>
           <div className="line mid"></div>

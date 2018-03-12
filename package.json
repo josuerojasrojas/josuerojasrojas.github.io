@@ -14,11 +14,9 @@
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-js",
+    "build": "npm-run-all build-css build-js; echo '---\npermalink: /\n---\n' | cat - build/index.html > temp && mv temp build/index.html",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "homepage": "/",
   "devDependencies": {

@@ -20,5 +20,3 @@ yarn-error.log*
 # sass
 /src/styles/sass/*.css
 /src/styles/css/*.css
-
-/build

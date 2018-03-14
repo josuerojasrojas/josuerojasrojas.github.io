@@ -5,7 +5,7 @@ import dateutil.parser as dp
 '''
 this script is to get github public projects with their info.
 '''
-ignore = ['GoodCause', 'TTP-Techninal-Questions','Code2040'] #repos to ignore
+ignore = ['GoodCause', 'TTP-Techninal-Questions','Code2040', 'josuerojasrojas.github.io', 'josuerojasrojas.github.io-old'] #repos to ignore
 user = 'josuerojasrojas'
 basicInfo = requests.get('https://api.github.com/users/'+user,auth=('josuerojasrojas',os.environ['gittoken'])).json()
 repos = requests.get('https://api.github.com/users/'+user+'/repos',auth=('josuerojasrojas',os.environ['gittoken'])).json()

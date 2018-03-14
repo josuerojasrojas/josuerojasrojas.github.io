@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/sass/ProjectBox.css';
+
 class LanguageCircle extends Component{
   render(){
     const className = 'language-circle ' +  this.props.language;
@@ -50,13 +51,11 @@ export default class ProjectBox extends Component{
     this.setState({
       showing: !this.state.showing,
     })
-    // e.stopPropagation();
-    // e.preventPropagation();
   }
 
   render(){
-    const projectLink = this.props.projectLink !== '#' ? <a href={this.props.projectLink} className='icon-border link'><div className='icon'></div></a> : '';
-    const githubLink = this.props.url !== '#' ? (<a href={this.props.url} className='icon-border octo'><div className='icon'></div></a>) : '';
+    const projectLink = this.props.projectLink !== '#' ? <a href={this.props.projectLink} target='_blank' className='icon-border link'><div className='icon'></div></a> : '';
+    const githubLink = this.props.url !== '#' ? (<a href={this.props.url} target='_blank' className='icon-border octo'><div className='icon'></div></a>) : '';
 
 
     const date = new Date(this.props.date)

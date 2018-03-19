@@ -5,6 +5,8 @@
   transform: translateX(100%)
   width: 100vw
   z-index: 3
+  &.true
+    transform: translateX(0)
   a
     color: $normal-color
   +large-devices
@@ -50,3 +52,52 @@
       width: 50%
     &:nth-child(2n+2):last-child
       width: 100%
+
+
+.DotButton-wrapper
+  transform: translate(0%)
+  +large-devices
+    display: none
+  margin: 7px
+  position: absolute
+  z-index: 4
+  right: 0
+  .DotButton
+    display: inline-block
+    height: 14px
+    width: 48px
+    margin-top: 9px
+    cursor: pointer
+    position: relative
+    z-index: 3
+    div
+      width: 10px
+      height: 10px
+      border-radius: 100%
+      display: inline-block
+      margin: 3px
+      transition: .4s
+      position: absolute
+      background-color: $normal-color
+      &:nth-child(2)
+        margin-left: 16px
+      &:nth-child(3)
+        margin-left: 29px
+  &.true
+    .DotButton
+      margin-top: 0
+      height: 32px
+      div
+        position: absolute
+        width: 32px
+        height: 5px
+        border-radius: 10px
+        margin: 0
+        &:first-child
+          transform: rotate(-45deg)
+          margin-top: 50%
+        &:nth-child(2)
+          opacity: 0
+        &:last-child
+          transform: rotate(45deg)
+          margin-top: 50%

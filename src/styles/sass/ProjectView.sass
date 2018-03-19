@@ -1,4 +1,3 @@
-@import sizes.sass
 @import mixins.sass
 @import Colors.sass
 
@@ -24,6 +23,8 @@
   flex-direction: column
   align-items: center
   min-width: 100vw
+  +large-devices
+    padding-right: 350px
   &.active-menu
     .projects-wrapper
       position: fixed
@@ -66,7 +67,6 @@
       margin-top: 5px
       padding-left: 7px
       padding-right: 7px
-      // justify-content: space-between
       &:hover
         color: $hover-color
       .language-circle
@@ -79,13 +79,10 @@
     flex-wrap: wrap
     padding-top: 12px
     .project-box
-      +large-devices
-        &:nth-child(3n+1)
-          margin-left: 6.25%
-          margin-right: 3.125%
-        &:nth-child(3n+2)
-          margin-left: 3.125%
-          margin-right: 3.125%
-        &:nth-child(3n+3)
-          margin-left: 3.125%
-          margin-right: 6.25%
+      +medium-devices
+        &:nth-child(2n+1)
+          margin-left: 6.6666666%
+          margin-right: 3.333333%
+        &:nth-child(2n+2)
+          margin-left: 3.333333%
+          margin-right: 6.666666%

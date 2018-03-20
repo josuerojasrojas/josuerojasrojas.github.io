@@ -5,46 +5,37 @@
   transform: translateX(100%)
   width: 100vw
   z-index: 3
+  &.true
+    transform: translateX(0)
   a
     color: $normal-color
+    background-color: rgba(31, 31, 31, .2)
+    &:hover
+      background-color: rgba(31, 31, 31, .4)
   +large-devices
     width: 350px
-    border-left: 1px solid rgba(31, 31, 31, 0.8)
     transform: translateX(0)
   .laguagesquare-All
     width: 100%
-    background-color: rgba(5, 251, 255, 0.15)
-    &:hover
+  &:not(:hover).All .laguagesquare-All, .laguagesquare-All:hover
+      border: 1px solid rgba(5, 251, 255, 0.1)
       background-color: rgba(5, 251, 255, 0.1)
-  .laguagesquare-Java
-    background-color: rgba(176, 114, 25, 0.2)
-    &:hover
+  &:not(:hover).Java .laguagesquare-Java, .laguagesquare-Java:hover
       background-color: rgba(176, 114, 25, 0.15)
-  .laguagesquare-Shell
-    background-color: rgba(137, 224, 81, 0.2)
-    &:hover
+  &:not(:hover).Shell .laguagesquare-Shell, .laguagesquare-Shell:hover
       background-color: rgba(137, 224, 81, 0.15)
-  .laguagesquare-Python
-    background-color: rgba(53, 114, 165, 0.2)
-    &:hover
+  &:not(:hover).Python .laguagesquare-Python, .laguagesquare-Python:hover
       background-color: rgba(53, 114, 165, 0.15)
-  .laguagesquare-JavaScript
-    background-color: rgba(241, 224, 90, 0.2)
-    &:hover
+  &:not(:hover).JavaScript .laguagesquare-JavaScript, .laguagesquare-JavaScript:hover
       background-color: rgba(241, 224, 90, 0.15)
-  .laguagesquare-HTML
-    background-color: rgba(227, 76, 38, 0.2)
-    &:hover
+  &:not(:hover).HTML .laguagesquare-HTML, .laguagesquare-HTML:hover
       background-color: rgba(227, 76, 38, 0.15)
-  .laguagesquare-CSS
-    background-color: rgba(86, 61, 124, 0.2)
-    &:hover
+  &:not(:hover).CSS .laguagesquare-CSS, .laguagesquare-CSS:hover
       background-color: rgba(86, 61, 124, 0.15)
-  .laguagesquare-CoffeeScript
-    background-color: rgba(36, 71, 118, 0.2)
-    &:hover
+  &:not(:hover).CoffeScript .laguagesquare-CoffeeScript, .laguagesquare-CoffeeScript:hover
       background-color: rgba(36, 71, 118, 0.15)
   .language
+    background-color: rgba(31, 31, 31, .2)
     transition: 400ms
     &:nth-child(n):not(.laguagesquare-All)
       width: 50%

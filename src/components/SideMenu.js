@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
+import MenuButton from './MenuButton';
 import '../styles/sass/SideMenu.css';
-import LinkButton from './Link-Button';
-
 
 class LanguageSquare extends Component {
   render() {
@@ -15,7 +14,7 @@ class LanguageSquare extends Component {
         float: 'left',
         border: '1px solid rgba(31, 31, 31, 0.8)',
         fontWeight: '400',
-        fontSize: '.95rem',
+        fontSize: '.9rem',
         letterSpacing: '.1rem',
         cursor: 'pointer',
       },
@@ -28,12 +27,23 @@ class LanguageSquare extends Component {
   }
 }
 
+// class DotButton extends Component {
+//   render() {
+//     return(
+//       <div className='DotButton-wrapper true' onClick={this.props.handleClick}>
+//         <div className='DotButton'>
+//           <div />
+//           <div />
+//           <div />
+//         </div>
+//       </div>
+//     )
+//   }
+// }
+
 export default class SideMenu extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      title: 'Featured Projects'
-    }
     this.makeLangSquare = this.makeLangSquare.bind(this);
   }
 
@@ -41,14 +51,15 @@ export default class SideMenu extends Component {
     const langSqu = [];
     langSqu.push(
       <LanguageSquare
-        language={'All'}/>
+        language={'All'}
+        onClick={this.props.languageSquareClick}/>
     )
     for(let i = 0; i < this.props.languages.length; i++){
       langSqu.push(
         <LanguageSquare
-          language={this.props.languages[i]}/>
+          language={this.props.languages[i]}
+          onClick={this.props.languageSquareClick}/>
       )
-
     }
     return(langSqu)
   }
@@ -77,8 +88,6 @@ export default class SideMenu extends Component {
         letterSpacing: '.1rem',
         cursor: 'pointer',
         width: '100%',
-        // marginBottom: '25px',
-        backgroundColor: 'rgba(31, 31, 31, .6)',
       },
       title: {
         fontSize: '1.2rem',
@@ -95,10 +104,16 @@ export default class SideMenu extends Component {
 
     }
     return(
-      <div style={style.menu} className='SideMenu'>
-        <a href='/#' style={style.home}>Home</a>
-        <div style={style.laguages}>
-          {this.makeLangSquare()}
+      <div>
+        <div style={style.menu} className={'SideMenu ' + this.props.isActive + ' ' + this.props.active_lang}>
+          <MenuButton
+            isX={true}
+            isActive={!this.props.isActive}
+            handleClick={()=>this.props.closeMenu(false)}/>
+          <a href='/#' style={style.home}>Home</a>
+          <div style={style.laguages}>
+            {this.makeLangSquare()}
+          </div>
         </div>
       </div>
     )

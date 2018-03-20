@@ -1,65 +1,30 @@
 import React, { Component } from 'react';
-// components needed
 import ProjectBox from './ProjectBox';
-import HamburgerMenu from './HamburgerMenu';
-import LinkButton from './Link-Button';
-// extra sass and data
+import SideMenu from './SideMenu';
+import MenuButton from './MenuButton';
 import '../styles/sass/ProjectView.css';
 import all_projects from '../data/data.json';
-
-import SideMenu from './SideMenu';
-
-class SearchBar extends Component{
-  constructor(props){
-    super(props);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-  }
-  handleSearch(event){
-    this.props.changeSearch(event);
-  }
-  // https://stackoverflow.com/questions/31272207/to-call-onchange-event-after-pressing-enter-key
-  handleKeyPress(e){
-    if (e.key === 'Enter') {
-      this.props.handleEnterPress();
-    }
-  }
-  render(){
-    return(
-      <input className='search-bar' type='text' placeholder='Search Bar' onChange={this.handleSearch} value={this.props.value} onKeyPress={this.handleKeyPress}/>
-    )
-  }
-}
-
-class LanguageSearchButton extends Component{
-  constructor(props){
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-  handleClick(){
-    this.props.handleClick(this.props.language);
-  }
-  render(){
-    return(
-      <div className='language-search' onClick={this.handleClick}>
-        {this.props.language} <div className={'language-circle ' + this.props.language}></div>
-      </div>
-    )
-  }
-}
 
 export default class ProjectView extends Component{
   constructor(props){
     super(props);
+    // language categories/indexing
+    // this should be made somewhere else....
+    const lang_search = {};
+    lang_search['All'] = []; //all category
+    for(let i = 0; i < all_projects['languages'].length; i++){
+      lang_search[all_projects['languages'][i]] = [];
+    }
     this.state = {
       current: 0,
       total_projects: all_projects['repos'].length,
-      project_array: [],
-      view_project: Array(all_projects['repos'].length).fill(''), // projects that will show up
-      search: '',
+      lang_search: lang_search,
+      lang_view: 'All',
       menuActive: false,
     }
     this.addProjectBox = this.addProjectBox.bind(this);
+    this.filterLanguage = this.filterLanguage.bind(this);
+    this.menuTrigger = this.menuTrigger.bind(this);
   }
 
   componentDidMount() {
@@ -71,163 +36,59 @@ export default class ProjectView extends Component{
     clearInterval(this.timer);
   }
 
+  // while adding each project this also adds them in the language category (indexing sort of) for faster searching/switching
   addProjectBox(){
     if(this.state.current === this.state.total_projects)
       return clearInterval(this.timer)
     const project = all_projects['repos'][this.state.current];
-    const project_array = this.state.project_array.slice();
-    project_array.push(
-      <ProjectBox
-        key={project['repo_name']}
-        languages={project['languagesList']}
-        title={project['repo_name']}
-        date={project['created']}
-        description={project['description']}
-        url={project['url']}
-        projectLink={project['projectLink']}/>
-    );
-    const view_project = project_array.slice();
+    const project_box = (<ProjectBox
+      key={project['repo_name']}
+      languages={project['languagesList']}
+      title={project['repo_name']}
+      date={project['created']}
+      description={project['description']}
+      url={project['url']}
+      projectLink={project['projectLink']}/>)
+    // bad habit to change state.............
+    this.state.lang_search['All'].push(project_box);
+    for(let i = 0; i < project['languagesList'].length; i++){
+      this.state.lang_search[project['languagesList'][i]].push(project_box);
+    }
     this.setState({
-      project_array: project_array,
-      view_project: view_project,
       current: this.state.current+1,
     });
   }
 
-  render() {
+  filterLanguage(language){
+    this.setState({
+      lang_view: language,
+      menuActive: false,
+    });
+  }
+
+  menuTrigger(active) {
+    this.setState({menuActive: active})
+  }
+
+  render(){
     return(
       <div>
+        <MenuButton
+          isX={false}
+          isActive={this.state.menuActive}
+          handleClick={()=>this.menuTrigger(true)}/>
         <SideMenu
-          languages={all_projects['languages']}/>
-        <div className='projects-view '>
+          languages={all_projects['languages']}
+          active_lang={this.state.lang_view}
+          languageSquareClick={this.filterLanguage}
+          isActive={this.state.menuActive}
+          closeMenu={this.menuTrigger}/>
+        <div className={'projects-view ' + this.state.menuActive}>
           <div className='projects-wrapper'>
-            {this.state.view_project}
+            {this.state.lang_search[this.state.lang_view]}
           </div>
         </div>
       </div>
     )
   }
 }
-
-// export default class ProjectView extends Component{
-//   constructor(props){
-//     super(props);
-//     this.state = {
-//       current: 0,
-//       total_projects: all_projects['repos'].length,
-//       project_array: [],
-//       view_project: Array(all_projects['repos'].length).fill(''), // projects that will show up
-//       search: '',
-//       menuActive: false,
-//     }
-//     this.addProjectBox = this.addProjectBox.bind(this);
-//     this.handleSearch = this.handleSearch.bind(this);
-//     this.menuClick = this.menuClick.bind(this);
-//     this.handleLanguageClick = this.handleLanguageClick.bind(this);
-//   }
-//
-//   componentDidMount(){
-//     document.title = "Josue's Projects"
-//     this.timer = setInterval(this.addProjectBox, 10);
-//   }
-//
-//   componentWillUnmount(){
-//     clearInterval(this.timer);
-//   }
-//
-//   addProjectBox(){
-//     if(this.state.current === this.state.total_projects){
-//       return clearInterval(this.timer)
-//     }
-//     const project = all_projects['repos'][this.state.current];
-//     const project_array = this.state.project_array.slice();
-//     project_array.push(
-//       <ProjectBox
-//         key={project['repo_name']}
-//         languages={project['languagesList']}
-//         title={project['repo_name']}
-//         date={project['created']}
-//         description={project['description']}
-//         url={project['url']}
-//         projectLink={project['projectLink']}/>
-//     );
-//     const view_project = project_array.slice();
-//     this.setState({
-//       project_array: project_array,
-//       view_project: view_project,
-//       current: this.state.current+1,
-//     });
-//   }
-//
-//   // need better search
-//   handleSearch(event, exact_match=false){
-//     const view_project = this.state.view_project.slice();
-//     let added = false;
-//     for(let i = 0; i < all_projects['repos'].length; i++){
-//       for(let lang of all_projects['repos'][i]['languagesList']){
-//         const search_check = exact_match ? lang.toLowerCase() === event.target.value.toLowerCase() : lang.toLowerCase().includes(event.target.value.toLowerCase());
-//         if(search_check){
-//          view_project[i] = this.state.project_array[i];
-//          added = true;
-//          break;
-//         }
-//       }
-//       if(!added){
-//         view_project[i] = '';
-//       }
-//       added = false;
-//     }
-//     this.setState({
-//       search: event.target.value,
-//       view_project: view_project
-//     })
-//   }
-//
-//   menuClick(){
-//     this.setState({menuActive: !this.state.menuActive})
-//   }
-//
-//   makeLanguageSearchButtons(){
-//     const langSearch = [];
-//     for(let lang of all_projects['languages']){
-//       langSearch.push(<LanguageSearchButton
-//         language={lang}
-//         handleClick={this.handleLanguageClick}/>);
-//     }
-//     return langSearch;
-//   }
-//
-//   handleLanguageClick(language){
-//
-//     this.handleSearch({target:{value:language}}, true);
-//     this.setState({
-//       menuActive: false,
-//     })
-//   }
-//
-//
-//   render(){
-//     // <LinkButton link='/#' text='Home'/>
-//     const menuStuff = (
-//       <div className='menu-stuff'>
-//         <SearchBar
-//           handleEnterPress={this.menuClick}
-//           changeSearch={this.handleSearch}
-//           value={this.state.search}/>
-//         <div className='languages-wrapper'>
-//           {this.makeLanguageSearchButtons()}
-//         </div>
-//       </div>)
-//     return (
-//       <div className={'projects-view ' + (this.state.menuActive ? 'active-menu' : '')}>
-//         <HamburgerMenu
-//           active={this.state.menuActive}
-//           onClick={this.menuClick}
-//           menuStuff={menuStuff}/>
-//         <div className='projects-wrapper'>
-//           {this.state.view_project}
-//         </div>
-//       </div>
-//   )
-//   }
-// }

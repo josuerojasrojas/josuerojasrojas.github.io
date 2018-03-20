@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MenuButton from './MenuButton';
 import '../styles/sass/SideMenu.css';
 
 class LanguageSquare extends Component {
@@ -26,19 +27,19 @@ class LanguageSquare extends Component {
   }
 }
 
-class DotButton extends Component {
-  render() {
-    return(
-      <div className={'DotButton-wrapper ' + this.props.isActive} onClick={this.props.handleClick}>
-        <div className='DotButton'>
-          <div />
-          <div />
-          <div />
-        </div>
-      </div>
-    )
-  }
-}
+// class DotButton extends Component {
+//   render() {
+//     return(
+//       <div className='DotButton-wrapper true' onClick={this.props.handleClick}>
+//         <div className='DotButton'>
+//           <div />
+//           <div />
+//           <div />
+//         </div>
+//       </div>
+//     )
+//   }
+// }
 
 export default class SideMenu extends Component {
   constructor(props) {
@@ -104,10 +105,11 @@ export default class SideMenu extends Component {
     }
     return(
       <div>
-        <DotButton
-          isActive={this.props.isActive}
-          handleClick={this.props.closeMenu}/>
-        <div style={style.menu} className={'SideMenu ' + this.props.isActive}>
+        <div style={style.menu} className={'SideMenu ' + this.props.isActive + ' ' + this.props.active_lang}>
+          <MenuButton
+            isX={true}
+            isActive={!this.props.isActive}
+            handleClick={()=>this.props.closeMenu(false)}/>
           <a href='/#' style={style.home}>Home</a>
           <div style={style.laguages}>
             {this.makeLangSquare()}

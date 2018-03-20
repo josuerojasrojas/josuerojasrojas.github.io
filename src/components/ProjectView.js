@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ProjectBox from './ProjectBox';
+import SideMenu from './SideMenu';
+import MenuButton from './MenuButton';
 import '../styles/sass/ProjectView.css';
 import all_projects from '../data/data.json';
-
-import SideMenu from './SideMenu';
 
 export default class ProjectView extends Component{
   constructor(props){
@@ -73,11 +73,16 @@ export default class ProjectView extends Component{
   render(){
     return(
       <div>
+        <MenuButton
+          isX={false}
+          isActive={this.state.menuActive}
+          handleClick={()=>this.menuTrigger(true)}/>
         <SideMenu
           languages={all_projects['languages']}
+          active_lang={this.state.lang_view}
           languageSquareClick={this.filterLanguage}
           isActive={this.state.menuActive}
-          closeMenu={()=>this.menuTrigger(!this.state.menuActive)}/>
+          closeMenu={this.menuTrigger}/>
         <div className={'projects-view ' + this.state.menuActive}>
           <div className='projects-wrapper'>
             {this.state.lang_search[this.state.lang_view]}

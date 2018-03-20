@@ -1,27 +1,28 @@
 @import mixins.sass
 @import Colors.sass
 // colors
-.Java
-  background-color: #b07219
-  order: 8
-.Shell
-  background-color: #89e051
-  order: 3
-.Python
-  background-color: #3572A5
-  order: 4
-.JavaScript
-  background-color: #f1e05a
-  order: 2
-.HTML
-  background-color: #e34c26
-  order: 7
-.CSS
-  background-color: #563d7c
-  order: 6
-.CoffeeScript
-  background-color: #244776
-  order: 5
+.language-circle
+  &.Java
+    background-color: #b07219
+    order: 8
+  &.Shell
+    background-color: #89e051
+    order: 3
+  &.Python
+    background-color: #3572A5
+    order: 4
+  &.JavaScript
+    background-color: #f1e05a
+    order: 2
+  &.HTML
+    background-color: #e34c26
+    order: 7
+  &.CSS
+    background-color: #563d7c
+    order: 6
+  &.CoffeeScript
+    background-color: #244776
+    order: 5
 
 .project-box
   user-select: none
@@ -32,8 +33,8 @@
   background-color: rgba(31, 31, 31, .3)
   border: 1px solid rgba(31,31,31,.8)
   float: left
-  width: 90%
-  margin: 0 5% 20px
+  width: 95%
+  margin: 0 2.5% 20px
   color: #989da1
   letter-spacing: .05rem
   transition: animation 400ms, opacity 400ms
@@ -45,7 +46,6 @@
       height: 1px
     cursor: pointer
   &.showing
-    // border: 1px solid #05fbff
     .information
       opacity: 0
     .show-box

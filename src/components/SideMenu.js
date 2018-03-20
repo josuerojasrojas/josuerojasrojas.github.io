@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import '../styles/sass/SideMenu.css';
-import LinkButton from './Link-Button';
-
 
 class LanguageSquare extends Component {
   render() {
@@ -38,7 +36,6 @@ class DotButton extends Component {
           <div />
         </div>
       </div>
-
     )
   }
 }
@@ -46,11 +43,7 @@ class DotButton extends Component {
 export default class SideMenu extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      active: false
-    }
     this.makeLangSquare = this.makeLangSquare.bind(this);
-    this.dotMenuClick = this.dotMenuClick.bind(this);
   }
 
   makeLangSquare() {
@@ -66,15 +59,8 @@ export default class SideMenu extends Component {
           language={this.props.languages[i]}
           onClick={this.props.languageSquareClick}/>
       )
-
     }
     return(langSqu)
-  }
-
-  dotMenuClick(){
-    this.setState({
-      active: !this.state.active
-    })
   }
 
   render() {
@@ -101,7 +87,6 @@ export default class SideMenu extends Component {
         letterSpacing: '.1rem',
         cursor: 'pointer',
         width: '100%',
-        backgroundColor: 'rgba(31, 31, 31, .6)',
       },
       title: {
         fontSize: '1.2rem',
@@ -120,9 +105,9 @@ export default class SideMenu extends Component {
     return(
       <div>
         <DotButton
-          isActive={this.state.active}
-          handleClick={this.dotMenuClick}/>
-        <div style={style.menu} className={'SideMenu ' + this.state.active}>
+          isActive={this.props.isActive}
+          handleClick={this.props.closeMenu}/>
+        <div style={style.menu} className={'SideMenu ' + this.props.isActive}>
           <a href='/#' style={style.home}>Home</a>
           <div style={style.laguages}>
             {this.makeLangSquare()}

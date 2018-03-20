@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-// components needed
 import ProjectBox from './ProjectBox';
-// import HamburgerMenu from './HamburgerMenu';
-// import LinkButton from './Link-Button';
-// extra sass and data
 import '../styles/sass/ProjectView.css';
 import all_projects from '../data/data.json';
 
@@ -28,6 +24,7 @@ export default class ProjectView extends Component{
     }
     this.addProjectBox = this.addProjectBox.bind(this);
     this.filterLanguage = this.filterLanguage.bind(this);
+    this.menuTrigger = this.menuTrigger.bind(this);
   }
 
   componentDidMount() {
@@ -63,7 +60,14 @@ export default class ProjectView extends Component{
   }
 
   filterLanguage(language){
-    this.setState({lang_view: language});
+    this.setState({
+      lang_view: language,
+      menuActive: false,
+    });
+  }
+
+  menuTrigger(active) {
+    this.setState({menuActive: active})
   }
 
   render(){
@@ -71,8 +75,10 @@ export default class ProjectView extends Component{
       <div>
         <SideMenu
           languages={all_projects['languages']}
-          languageSquareClick={this.filterLanguage}/>
-        <div className='projects-view '>
+          languageSquareClick={this.filterLanguage}
+          isActive={this.state.menuActive}
+          closeMenu={()=>this.menuTrigger(!this.state.menuActive)}/>
+        <div className={'projects-view ' + this.state.menuActive}>
           <div className='projects-wrapper'>
             {this.state.lang_search[this.state.lang_view]}
           </div>

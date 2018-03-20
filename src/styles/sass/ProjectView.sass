@@ -1,79 +1,17 @@
 @import mixins.sass
 @import Colors.sass
 
-// colors
-.Java
-  background-color: #b07219
-.Shell
-  background-color: #89e051
-.Python
-  background-color: #3572A5
-.JavaScript
-  background-color: #f1e05a
-.HTML
-  background-color: #e34c26
-.CSS
-  background-color: #563d7c
-.CoffeeScript
-  background-color: #244776
-
 .projects-view
   padding-top: 20px
   display: flex
   flex-direction: column
   align-items: center
   min-width: 100vw
+  transition: 400ms
   +large-devices
     padding-right: 350px
-  &.active-menu
-    .projects-wrapper
-      position: fixed
-      padding-top: 72px
-      left: 0
-      top: 0
-  .menu-stuff
-    width: 100%
-    display: flex
-    flex-direction: column
-    align-items: center
-    .link-button
-      margin-bottom: 10px
-  .search-bar
-    width: 100%
-    outline: none
-    height: 30px
-    margin-top: 0
-    outline: none
-    border: 1px solid rgba(233, 233, 233, 0.6)
-    box-shadow: 0 0 2px rgba(233, 233, 233, 0.6)
-    background-color: rgba(177, 177, 177, 0.11)
-    transition: 400ms
-    color: white
-    font-size: .9rem
-    &:focus
-      border: 1px solid $hover-color
-      box-shadow: 0 0 2px $hover-color
-      background-color: rgba(5, 251, 255, 0.09)
-  .languages-wrapper
-    width: 100%
-    .language-search
-      color: $normal-color
-      font-size: 1.2rem
-      display: flex
-      align-items: center
-      justify-content: space-between
-      width: 100%
-      cursor: pointer
-      margin-top: 5px
-      padding-left: 7px
-      padding-right: 7px
-      &:hover
-        color: $hover-color
-      .language-circle
-        width: 20px
-        height: 20px
-        border-radius: 100%
-        display: inline-block
+  &.true
+    filter: blur(10px)
   .projects-wrapper
     display: flex
     flex-wrap: wrap

@@ -27,7 +27,7 @@ const icons = {
 
 export default class SimpleCard extends Component {
   componentDidMount() {
-    document.title = "Josue's Projecs";
+    document.title = "Josue's Porfolio";
   }
 
   makeSocialBar(sociality ,main_color, hover_color){

@@ -4,8 +4,8 @@
   position: fixed
   z-index: -1
   .background
-    height: 100%
-    width: 100%
+    height: 105%
+    width: 105%
     background-size: cover
     background-position: center
     background-color: black
@@ -25,7 +25,6 @@
     z-index: -1
   &.active
     .background
-      height: 105%
-      width: 105%
-    .shade
-      background-color: rgba(0, 0, 0, 0.8)
+      height: 100%
+      width: 100%
+      filter: blur(10px)

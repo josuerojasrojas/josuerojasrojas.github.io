@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import SimpleBackground from './components/simple-background.js';
 import SimpleCard from './components/simple-card.js';
-import ProjectView from './components/ProjectView.js';
+import SimpleContainer from './components/simple-container.js';
+import SimpleFooter from './components/simple-footer.js';
+import './styles/sass/app.css';
 import space from './images/space.jpg';
 
 class App extends Component {
@@ -26,9 +28,11 @@ class App extends Component {
       projects: window.location.hash === '#projects' ? true : false,
     })
   }
-  // home site
-  home = (<div>
-    <SimpleCard
+
+  getView(isProjects) {
+    return isProjects ? (<SimpleContainer
+      main_color={'#989DA1'}
+      hover_color={'#05fbff'}/>) : (<SimpleCard
       social={
         {'Github': 'https://github.com/josuerojasrojas',
         'LinkedIn': 'https://www.linkedin.com/in/josuerojasz/',
@@ -40,19 +44,20 @@ class App extends Component {
       profile_image='https://avatars0.githubusercontent.com/u/10749061'
       title='Josue Rojas'
       sub_title='Software Developer / Wonderer'
-    />
-  </div>)
-
-  // projects
-  projects = (<div><ProjectView/></div>)
+    />);
+  }
 
   render() {
     const background =  (<SimpleBackground backgroundImage={space} active={this.state.projects}/>);
-    const view = this.state.projects ? this.projects : this.home;
     return (
       <div>
       {background}
-      {view}
+      <div className='view-wrapper'>
+        {this.getView(this.state.projects)}
+        <SimpleFooter
+          main_color={'#989DA1'}
+          hover_color={'#05fbff'} />
+      </div>
       </div>
     );
   }

@@ -1,7 +1,60 @@
+@import mixins.sass
+@import './Colors.sass'
+
 .simple-container
   background-color: rgba(31, 31, 31, 0.6)
-  min-width: 100px
+  width: 95%
   min-height: 100px
-  padding: 40px 30px
+  padding: 20px
   margin: auto
   display: table
+  +medium-devices
+    width: 80%
+  +large-devices
+    width: 60%
+  .top-wrapper
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin-bottom: 10px
+    .title
+      font-size: 1.25rem
+    .close-btn-wrapper
+      position: relative
+      width: 32px
+      height: 32px
+      margin: 0px 3px
+      display: inline-block
+      div
+        position: absolute
+        background-color: $normal-color
+        width: 5px
+        height: 32px
+        transition: 400ms
+        margin-left: 13px
+        &:first-child
+          transform: rotate(45deg)
+        &:last-child
+          transform: rotate(-45deg)
+      &:hover
+        cursor: pointer
+        div
+          background-color: $hover-color
+  .project-boxes
+    display: flex
+    width: 100%
+    flex-wrap: wrap
+    .project-box
+      +medium-devices
+        &:nth-child(2n+1)
+          margin-left: 6.6666666%
+          margin-right: 3.333333%
+        &:nth-child(2n+2)
+          margin-left: 3.333333%
+          margin-right: 6.666666%
+
+  .container-footer
+    text-align: center
+    .language-search-bar
+      display: flex
+      justify-content: center

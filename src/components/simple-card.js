@@ -25,30 +25,11 @@ const icons = {
   'Github': Github
 }
 
-// needs to be more generic but oh well.....
-// class SimpleFooter extends Component{
-//   constructor(props){
-//     super(props);
-//     this.state = {
-//       hover: false,
-//     }
-//     this.toggleHover = this.toggleHover.bind(this);
-//   }
-//   toggleHover(isHover){
-//     this.setState({hover: isHover});
-//   }
-//   componentDidMount(){
-//     document.title = "Josue's Porfolio"
-//   }
-//   render(){
-//     const color = this.state.hover ? this.props.hover_color : this.props.main_color;
-//     return(
-//       <footer> <a style={{color: color}} href="https://github.com/josuerojasrojas/josuerojasrojas.github.io-react" onMouseEnter={() => this.toggleHover(true)} onMouseLeave={() => this.toggleHover(false)}> Source Here</a></footer>
-//     )
-//   }
-// }
-
 export default class SimpleCard extends Component {
+  componentDidMount() {
+    document.title = "Josue's Projecs";
+  }
+
   makeSocialBar(sociality ,main_color, hover_color){
     let socialBar = [];
     for(let key in sociality){
@@ -64,11 +45,12 @@ export default class SimpleCard extends Component {
     }
     return socialBar;
   }
+
   render(){
     const socialbar = this.makeSocialBar(this.props.social, this.props.main_color, this.props.hover_color);
     // TODO: links shoud be a prop
     return(
-        <div className='card'>
+        <div className='card view'>
           <div
             className='image'
             style={{backgroundImage: 'url(' + this.props.profile_image +')'}}>

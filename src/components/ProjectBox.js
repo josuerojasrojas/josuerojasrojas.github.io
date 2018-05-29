@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/sass/ProjectBox.css';
-
-class LanguageCircle extends Component{
-  render(){
-    const className = 'language-circle ' +  this.props.language;
-    return(
-      <span className={className}></span>
-  )}
-}
+import LanguageCircle from './LanguageCircle';
 
 class Dash extends Component{
   render(){

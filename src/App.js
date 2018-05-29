@@ -3,7 +3,6 @@ import SimpleBackground from './components/simple-background.js';
 import SimpleCard from './components/simple-card.js';
 import SimpleContainer from './components/simple-container.js';
 import SimpleFooter from './components/simple-footer.js';
-import ProjectView from './components/ProjectView.js';
 import './styles/sass/app.css';
 import space from './images/space.jpg';
 
@@ -31,7 +30,9 @@ class App extends Component {
   }
 
   getView(isProjects) {
-    return isProjects ? (<SimpleContainer/>) : (<SimpleCard
+    return isProjects ? (<SimpleContainer
+      main_color={'#989DA1'}
+      hover_color={'#05fbff'}/>) : (<SimpleCard
       social={
         {'Github': 'https://github.com/josuerojasrojas',
         'LinkedIn': 'https://www.linkedin.com/in/josuerojasz/',
@@ -48,7 +49,6 @@ class App extends Component {
 
   render() {
     const background =  (<SimpleBackground backgroundImage={space} active={this.state.projects}/>);
-    // const view = this.state.projects ? this.projects : this.home;
     return (
       <div>
       {background}

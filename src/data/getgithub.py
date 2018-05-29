@@ -20,20 +20,31 @@ def getPinnedNames():
         pinnedLinks.append(text.get_text())
     return pinnedLinks
 
+def getSearchablelanguages():
+    r = requests.get('https://github.com/'+USERNAME_SEARCH+'?tab=repositories').content
+    soup = BeautifulSoup(r)
+    container = soup.find_all('div', {'class': 'select-menu d-inline-block js-menu-container js-select-menu select-menu-modal-right'})[1].find_all('span', {'class':'select-menu-item-text js-select-button-text'})#should be the second one...
+    langs = []
+    for input in container:
+        langs.append(input.get_text())
+    return langs
+# print getSearchablelanguages()
+# exit()
+
 
 
 find = getPinnedNames() #repos to find
 user = 'josuerojasrojas'
 basicInfo = requests.get('https://api.github.com/users/'+user,auth=('josuerojasrojas',os.environ['gittoken'])).json()
 repos = requests.get('https://api.github.com/users/'+user+'/repos',auth=('josuerojasrojas',os.environ['gittoken'])).json()
-allLanguages = set([])
+allLanguages = getSearchablelanguages()
 
 
 def languagePercent(langs):
     total = 0
     for language in langs.keys():
         total+= langs[language]
-        allLanguages.add(language) #this should be more locally scope but this works fine for now
+        # allLanguages.add(language) #this should be more locally scope but this works fine for now
     for language in langs.keys():
         langs[language] = (langs[language]/total) * 100
     return langs
@@ -50,6 +61,7 @@ def getInfo():
     languagesList= []
     for repo in repos:
         if repo['name'] not in find:
+            print repo['name']
             continue
         languagesInfo = languagePercent(requests.get(repo['languages_url'],auth=('josuerojasrojas',os.environ['gittoken'])).json()) if repo['languages_url'] else []
         repoNames.append(repo['name'] if repo['name'] else '')

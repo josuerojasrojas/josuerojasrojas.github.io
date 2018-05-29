@@ -9,10 +9,27 @@ import all_projects from '../data/data.json';
 
 export default class SimpleContainer extends Component {
   componentDidMount() {
-    document.title = "Josue's Projecs";
+    document.title = "Josue's Projects";
   }
 
-  makeLangCircles(langs){
+  addProjectBox(repos) {
+    const project_box = [];
+    for(let repo of repos){
+      project_box.push(
+        <ProjectBox
+          key={repo['repo_name']}
+          languages={repo['languagesList']}
+          title={repo['repo_name']}
+          date={repo['created']}
+          description={repo['description']}
+          url={repo['url']}
+          projectLink={repo['projectLink']}/>
+      )
+    }
+    return project_box;
+  }
+
+  makeLangCircles(langs) {
     let langCir = [];
     for(let l of langs){
       langCir.push(<a href={`https://github.com/josuerojasrojas?utf8=✓&tab=repositories&language=${l}`}><LanguageCircle language={l}/></a>);
@@ -21,7 +38,6 @@ export default class SimpleContainer extends Component {
   }
 
   render() {
-    console.log(all_projects['languages'])
     return(
       <div className='simple-container view'>
         <div className='top-wrapper'>
@@ -29,30 +45,7 @@ export default class SimpleContainer extends Component {
           <div onClick={()=>window.location='#'} className='close-btn-wrapper'><div></div><div></div></div>
         </div>
         <div className='project-boxes'>
-          <ProjectBox
-            key='project'
-            languages={['Java', 'Python']}
-            title='Example'
-            date={'may'}
-            description='This is a  description'
-            url={'http://google.com'}
-            projectLink={'http://google.com'}/>
-          <ProjectBox
-            key='project'
-            languages={['Java', 'Python']}
-            title='Example'
-            date={'may'}
-            description='This is a much longer description to describe'
-            url={'http://google.com'}
-            projectLink={'http://google.com'}/>
-          <ProjectBox
-            key='project'
-            languages={['Java', 'Python']}
-            title='Example 3'
-            date={'may'}
-            description='This is a much longer description to describe this project with '
-            url={'http://google.com'}
-            projectLink={'http://google.com'}/>
+          {this.addProjectBox(all_projects['repos'])}
         </div>
         <div className='container-footer'>
           <div className='text'>Check out more at</div>

@@ -1,11 +1,28 @@
 from __future__ import division
+from bs4 import BeautifulSoup
 import requests, json, os
 import dateutil.parser as dp
 
 '''
 this script is to get github public projects with their info.
+modidfied to only get pinned repos
 '''
-ignore = ['GoodCause', 'TTP-Techninal-Questions','Code2040', 'josuerojasrojas.github.io', 'josuerojasrojas.github.io-old', 'Bulletin-Board', 'hackathonstuff2017', 'Portfolio'] #repos to ignore
+
+USERNAME_SEARCH = 'josuerojasrojas'
+
+
+def getPinnedNames():
+    r = requests.get('https://github.com/'+USERNAME_SEARCH).content
+    soup = BeautifulSoup(r)
+    span = soup.find_all('span', {'class': 'repo js-repo'})
+    pinnedLinks = []
+    for text in span:
+        pinnedLinks.append(text.get_text())
+    return pinnedLinks
+
+
+
+find = getPinnedNames() #repos to find
 user = 'josuerojasrojas'
 basicInfo = requests.get('https://api.github.com/users/'+user,auth=('josuerojasrojas',os.environ['gittoken'])).json()
 repos = requests.get('https://api.github.com/users/'+user+'/repos',auth=('josuerojasrojas',os.environ['gittoken'])).json()
@@ -32,7 +49,7 @@ def getInfo():
     projectLink = []
     languagesList= []
     for repo in repos:
-        if repo['name'] in ignore:
+        if repo['name'] not in find:
             continue
         languagesInfo = languagePercent(requests.get(repo['languages_url'],auth=('josuerojasrojas',os.environ['gittoken'])).json()) if repo['languages_url'] else []
         repoNames.append(repo['name'] if repo['name'] else '')

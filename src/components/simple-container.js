@@ -32,7 +32,8 @@ export default class SimpleContainer extends Component {
   makeLangCircles(langs) {
     let langCir = [];
     for(let l of langs){
-      langCir.push(<a href={`https://github.com/josuerojasrojas?utf8=✓&tab=repositories&language=${l}`}><LanguageCircle language={l}/></a>);
+      // might cause error (not show) if the sass for language-circles doesnt exist maybe make language circles have option for links
+      langCir.push(<a className={`language-circle ${l}`} href={`https://github.com/josuerojasrojas?utf8=✓&tab=repositories&language=${l}`}></a>);
     }
     return langCir;
   }

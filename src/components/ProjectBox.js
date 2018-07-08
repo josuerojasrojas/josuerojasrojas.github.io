@@ -5,18 +5,12 @@ import LanguageCircle from './LanguageCircle';
 class Dash extends Component{
   render(){
     const styles = {
-      icon_border: {
-        transform: this.props.isActive ? 'rotate(180deg)': 'rotate(0deg)',
-        bottom: this.props.isActive ? 'calc(100% - 30px)' : '10px',
-      },
       icon: {
         backgroundColor: this.props.isActive ? '#05fbff' : '',
       }
     }
     return(
-      <div
-        className='icon-border dash'
-        style={styles.icon_border}>
+      <div className='icon-border dash'>
         <div className='icon' style={styles.icon}></div>
       </div>
     )

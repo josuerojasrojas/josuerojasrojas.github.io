@@ -17,17 +17,16 @@
   transition: animation 400ms, opacity 400ms
   font-weight: 200
   position: relative
-  &:hover
-    .icon-border.dash .icon
-      width: 100%
-      height: 1px
-    cursor: pointer
+  cursor: pointer
   &.showing
     .information
       opacity: 0
     .show-box
       z-index: 2
       opacity: 1
+    .icon-border.dash .icon
+      width: 100%
+      height: 1px
   +medium-devices
     text-align: center
     width: 47%
@@ -46,7 +45,7 @@
     margin-bottom: auto
   .icon-border.dash
     bottom: 10px
-    left: calc(50% - 7.5%)
+    left: calc(50% - 10%)
     position: absolute
   .show-box
     z-index: -1
@@ -101,7 +100,7 @@
 
 .icon-border.dash
   cursor: pointer
-  width: 15%
+  width: 20%
   height: 30px
   display: flex
   justify-content: center
@@ -110,7 +109,7 @@
   transition: 400ms
   .icon
     transition: 400ms
-    width: 90%
+    width: 70%
     height: 3px
     mask-size: cover
     background-color: $normal-color

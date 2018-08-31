@@ -17,10 +17,10 @@ export default class SimpleContainer extends Component {
     for(let repo of repos){
       project_box.push(
         <ProjectBox
-          key={repo['repo_name']}
+          key={repo['name']}
           languages={repo['languagesList']}
-          title={repo['repo_name']}
-          date={repo['created']}
+          title={repo['name']}
+          date={repo['created_at']}
           description={repo['description']}
           url={repo['url']}
           projectLink={repo['projectLink']}/>

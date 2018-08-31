@@ -2,6 +2,7 @@ from __future__ import division
 from bs4 import BeautifulSoup
 import requests, json, os
 import dateutil.parser as dp
+# TODO: repos that change name are not appearing (might take some time or something wrong, either way its time to investigate)
 
 '''
 this script is to get github public projects with their info.
@@ -28,12 +29,8 @@ def getSearchablelanguages():
     for input in container:
         langs.append(input.get_text())
     return langs
-# print getSearchablelanguages()
-# exit()
 
-
-
-find = getPinnedNames() #repos to find
+findList = getPinnedNames() #repos to find
 user = 'josuerojasrojas'
 basicInfo = requests.get('https://api.github.com/users/'+user,auth=('josuerojasrojas',os.environ['gittoken'])).json()
 repos = requests.get('https://api.github.com/users/'+user+'/repos',auth=('josuerojasrojas',os.environ['gittoken'])).json()
@@ -59,19 +56,19 @@ def getInfo():
     languages = []
     projectLink = []
     languagesList= []
-    for repo in repos:
-        if repo['name'] not in find:
-            print repo['name']
-            continue
+    datevalue = []
+    for repo_name in findList:
+        repo = requests.get('https://api.github.com/repos/'+user+'/'+repo_name,auth=('josuerojasrojas',os.environ['gittoken'])).json()
+        print repo
         languagesInfo = languagePercent(requests.get(repo['languages_url'],auth=('josuerojasrojas',os.environ['gittoken'])).json()) if repo['languages_url'] else []
         repoNames.append(repo['name'] if repo['name'] else '')
         htmlURL.append(repo['html_url'] if repo['html_url'] else '')
         repoDesc.append(repo['description'] if repo['description'] else '')
         createAt.append(repo['created_at'] if repo['created_at'] else '')
+        datevalue.append(dp.parse(repo['created_at']).strftime('%s') if repo['created_at'] else '')
         languages.append(languagesInfo)
         languagesList.append(languagesInfo.keys())
         projectLink.append(repo['homepage'] if repo['homepage'] else '#')
-    datevalue = [dp.parse(dateC).strftime('%s') for dateC in createAt] # value of time for sorting
     return repoNames, htmlURL, repoDesc, createAt, languages,languagesList, projectLink, datevalue
 
 # this returns a json object (how i wanted)

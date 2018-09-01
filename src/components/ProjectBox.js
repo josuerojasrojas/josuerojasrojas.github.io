@@ -59,7 +59,7 @@ export default class ProjectBox extends Component{
             Date Created {date.getFullYear() + '-' + ( (date.getMonth()+1 > 9) ? (date.getMonth()+1) : '0' + (date.getMonth()+1)) + '-' + ( (date.getDate() > 9) ? (date.getDate()) : '0'  + (date.getDate() + 1))}
           </div>
           <div className='description'>
-            {this.props.description}
+            <p>{this.props.description}</p>
           </div>
         </div>
         <Dash isActive={this.state.showing}/>

@@ -2,6 +2,7 @@ from __future__ import division
 from bs4 import BeautifulSoup
 import requests, json, os
 import dateutil.parser as dp
+# TODO: repos that change name are not appearing (might take some time or something wrong, either way its time to investigate)
 
 '''
 this script is to get github public projects with their info.
@@ -28,15 +29,10 @@ def getSearchablelanguages():
     for input in container:
         langs.append(input.get_text())
     return langs
-# print getSearchablelanguages()
-# exit()
 
-
-
-find = getPinnedNames() #repos to find
-user = 'josuerojasrojas'
-basicInfo = requests.get('https://api.github.com/users/'+user,auth=('josuerojasrojas',os.environ['gittoken'])).json()
-repos = requests.get('https://api.github.com/users/'+user+'/repos',auth=('josuerojasrojas',os.environ['gittoken'])).json()
+findList = getPinnedNames() #repos to find
+basicInfo = requests.get('https://api.github.com/users/'+USERNAME_SEARCH,auth=('josuerojasrojas',os.environ['gittoken'])).json()
+# repos = requests.get('https://api.github.com/users/'+USERNAME_SEARCH+'/repos',auth=('josuerojasrojas',os.environ['gittoken'])).json()
 allLanguages = getSearchablelanguages()
 
 
@@ -49,50 +45,29 @@ def languagePercent(langs):
         langs[language] = (langs[language]/total) * 100
     return langs
 
-# i am sure there is a better way to filter the data
-# ill do that later
+# filter the information and store it in a list where each element is a repo
 def getInfo():
-    repoNames = []
-    htmlURL = []
-    repoDesc = []
-    createAt = []
-    languages = []
-    projectLink = []
-    languagesList= []
-    for repo in repos:
-        if repo['name'] not in find:
-            print repo['name']
-            continue
+    repoJson = []
+    # info filter are just simple filter from the json data we get, if the information needs to be cleaned or modified then it is done after
+    info_filter = ['name', 'html_url', 'description', 'created_at', 'homepage']
+    for repo_name in findList:
+        repo = requests.get('https://api.github.com/repos/'+USERNAME_SEARCH+'/'+repo_name,auth=('josuerojasrojas',os.environ['gittoken'])).json()
+        singleJson = {}
         languagesInfo = languagePercent(requests.get(repo['languages_url'],auth=('josuerojasrojas',os.environ['gittoken'])).json()) if repo['languages_url'] else []
-        repoNames.append(repo['name'] if repo['name'] else '')
-        htmlURL.append(repo['html_url'] if repo['html_url'] else '')
-        repoDesc.append(repo['description'] if repo['description'] else '')
-        createAt.append(repo['created_at'] if repo['created_at'] else '')
-        languages.append(languagesInfo)
-        languagesList.append(languagesInfo.keys())
-        projectLink.append(repo['homepage'] if repo['homepage'] else '#')
-    datevalue = [dp.parse(dateC).strftime('%s') for dateC in createAt] # value of time for sorting
-    return repoNames, htmlURL, repoDesc, createAt, languages,languagesList, projectLink, datevalue
+        singleJson['languages'] = languagesInfo
+        singleJson['languagesList'] = languagesInfo.keys()
+        singleJson['datevalue'] = dp.parse(repo['created_at']).strftime('%s') if repo['created_at'] else ''
+        for filter in info_filter:
+            singleJson[filter] = repo[filter] if repo[filter] else ''
+        repoJson.append(singleJson)
+    return repoJson
 
 # this returns a json object (how i wanted)
 # getInfo() should be run first to get allLanguages
-def organizeData(repoNames, htmlURL, repoDesc, createAt, languages,languagesList, projectLink, datevalue, allLanguages=allLanguages):
-    # make each repo json
-    repoJson = []
-    for i in range(len(repoNames)):
-        repoJson.append({
-        'repo_name': repoNames[i],
-        'url': htmlURL[i],
-        'description': repoDesc[i],
-        'languages': languages[i],
-        'languagesList': languagesList[i],
-        'created': createAt[i],
-        'projectLink': projectLink[i],
-        'datevalue': datevalue[i]
-        })
+def organizeData(repoJson, allLanguages=allLanguages):
     dataJson = {
         'fullname': basicInfo['name'],
-        'username': user,
+        'username': USERNAME_SEARCH,
         'avatar_url': basicInfo['avatar_url'],
         'languages':list(allLanguages),
         'repos': repoJson
@@ -100,9 +75,9 @@ def organizeData(repoNames, htmlURL, repoDesc, createAt, languages,languagesList
     return dataJson
 
 def main():
-    repoNames, htmlURL, repoDesc, createAt, languages, languagesList, projectLink, datevalue = getInfo()
+    repoJson = getInfo()
     with open('data.json','w') as jsonfile:
-        json.dump(organizeData(repoNames, htmlURL, repoDesc, createAt, languages,languagesList, projectLink, datevalue), jsonfile)
+        json.dump(organizeData(repoJson), jsonfile)
     os.chdir(os.getcwd())
     # os.system('cd '+ os.getcwd()+ '; json2yaml data.json > data.yml') #it's easier to use so i've heard, plus it looks pretty
 

@@ -49,6 +49,9 @@ export default class SimpleCard extends Component {
   render(){
     const socialbar = this.makeSocialBar(this.props.social, this.props.main_color, this.props.hover_color);
     // TODO: links shoud be a prop
+    // const links = {'About': '/#about', 'Projects': '/#projects','Resume': `https://docs.google.com/viewerng/viewer?url=${window.location.host}/resume.pdf`, 'Space': 'https://josuerz.xyz/Stars-React/#100'}
+    const links = {'Projects': '/#projects','Resume': `https://docs.google.com/viewerng/viewer?url=${window.location.host}/resume.pdf`}
+
     return(
         <div className='card view'>
           <div
@@ -61,7 +64,7 @@ export default class SimpleCard extends Component {
           </div>
           {socialbar}
           <HiddenLinks
-            links={{'Projects': '/#projects','Resume': `https://docs.google.com/viewerng/viewer?url=${window.location.host}/resume.pdf`}}
+            links={links}
             main_color={this.props.main_color}
             hover_color={this.props.hover_color} />
         </div>

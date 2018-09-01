@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import SimpleBackground from './components/simple-background.js';
 import SimpleCard from './components/simple-card.js';
-import SimpleContainer from './components/simple-container.js';
+import AboutPage from './components/Page-About';
+import ProjectsPage from './components/Page-Projects';
 import SimpleFooter from './components/simple-footer.js';
 import './styles/sass/app.css';
 import space from './images/space.jpg';
@@ -10,7 +11,8 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      projects: window.location.hash === '#projects' ? true : false,
+      active_view:['#projects', '#about'].includes(window.location.hash) ? true : false,
+      page: window.location.hash
     }
     this.changeWindow = this.changeWindow.bind(this);
   }
@@ -23,37 +25,45 @@ class App extends Component {
   componentWillUnmount() {
     window.removeEventListener("hashchange", this.changeWindow, false);
   }
+
   changeWindow(h){
     this.setState({
-      projects: window.location.hash === '#projects' ? true : false,
+      active_view:['#projects', '#about'].includes(window.location.hash) ? true : false,
+      page: window.location.hash
     })
   }
 
-  getView(isProjects) {
-    return isProjects ? (<SimpleContainer
-      main_color={'#989DA1'}
-      hover_color={'#05fbff'}/>) : (<SimpleCard
-      social={
-        {'Github': 'https://github.com/josuerojasrojas',
-        'LinkedIn': 'https://www.linkedin.com/in/josuerojasz/',
-        'Facebook': 'https://www.facebook.com/withcheesepls',
-        'Instagram': 'https://www.instagram.com/withcheesepls/',}
-      }
-      hover_color='#05fbff'
-      main_color='#989DA1'
-      profile_image='https://avatars0.githubusercontent.com/u/10749061'
-      title='Josue Rojas'
-      sub_title='Software Developer / Wonderer'
-    />);
+  // sort of handle the routes (views)
+  getView(page) {
+    switch (page) {
+      case '#about':
+        return (<AboutPage/>)
+      case '#projects':
+        return (<ProjectsPage/>)
+      default:
+        return (<SimpleCard
+          social={
+            {'Github': 'https://github.com/josuerojasrojas',
+            'LinkedIn': 'https://www.linkedin.com/in/josuerojasz/',
+            'Facebook': 'https://www.facebook.com/withcheesepls',
+            'Instagram': 'https://www.instagram.com/withcheesepls/',}
+          }
+          hover_color='#05fbff'
+          main_color='#989DA1'
+          profile_image='https://avatars0.githubusercontent.com/u/10749061'
+          title='Josue Rojas'
+          sub_title='Software Developer / Wonderer'
+        />)
+    }
   }
 
   render() {
-    const background =  (<SimpleBackground backgroundImage={space} active={this.state.projects}/>);
+    const background =  (<SimpleBackground backgroundImage={space} active={this.state.active_view}/>);
     return (
       <div>
       {background}
       <div className='view-wrapper'>
-        {this.getView(this.state.projects)}
+        {this.getView(this.state.page)}
         <SimpleFooter
           main_color={'#989DA1'}
           hover_color={'#05fbff'} />

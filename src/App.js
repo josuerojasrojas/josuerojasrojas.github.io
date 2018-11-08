@@ -50,9 +50,8 @@ class App extends Component {
           'https://josuerojasrojas.github.io/react-loading/',
           'https://publicsuggestions.herokuapp.com/',
           'https://sites.google.com/site/josuerojasportfolio/python/migration-of-language-and-income'];
-        window.location = '/#';
+        window.location.hash = '#home';
         window.location = random_links[Math.floor(Math.random() * random_links.length)];
-        return ;
       default:
         return (<SimpleCard
           social={

@@ -40,6 +40,19 @@ class App extends Component {
         return (<AboutPage/>)
       case '#projects':
         return (<ProjectsPage/>)
+      case '#random':
+        const random_links = [
+          'http://josuerojasrojas.github.io/Stars-React/#300',
+          'http://josuerojasrojas.github.io/fav-quotes/',
+          'https://calendarttp.herokuapp.com/',
+          'https://github.com/josuerojasrojas/ebay-notifier',
+          'https://unkown-timers.herokuapp.com/',
+          'https://josuerojasrojas.github.io/react-loading/',
+          'https://publicsuggestions.herokuapp.com/',
+          'https://sites.google.com/site/josuerojasportfolio/python/migration-of-language-and-income'];
+        window.location = '/#';
+        window.location = random_links[Math.floor(Math.random() * random_links.length)];
+        return ;
       default:
         return (<SimpleCard
           social={

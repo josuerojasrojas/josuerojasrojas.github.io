@@ -48,16 +48,8 @@ export default class SimpleCard extends Component {
 
   render(){
     const socialbar = this.makeSocialBar(this.props.social, this.props.main_color, this.props.hover_color);
-    // TODO: random should be another #random and be handled in to redirect somewhere random (or this will only be random everytime you refresh)
-    const random_links = [
-      'https://github.com/josuerojasrojas/Stars-React',
-      'https://github.com/josuerojasrojas/fav-quotes',
-      'https://github.com/josuerojasrojas/Unknown-Timers',
-      'https://github.com/josuerojasrojas/form-gallery',
-      'https://github.com/josuerojasrojas/react-loading',
-      'https://github.com/josuerojasrojas/Suggestions'];
     // TODO: links shoud be a prop
-    const links = {'About': '/#about', 'Projects': '/#projects','Resume': `https://docs.google.com/viewerng/viewer?url=${window.location.host}/resume.pdf`, 'Random': random_links[Math.floor(Math.random() * random_links.length)]}
+    const links = {'About': '/#about', 'Projects': '/#projects','Resume': `https://docs.google.com/viewerng/viewer?url=${window.location.host}/resume.pdf`, 'Random': '/#random'}
     return(
         <div className='card view'>
           <div

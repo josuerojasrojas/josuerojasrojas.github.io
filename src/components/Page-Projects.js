@@ -8,20 +8,36 @@ import ProjectBox from './ProjectBox';
 import all_projects from '../data/data.json';
 
 export default class ProjectsPage extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      activeBox: -1,
+    }
+    this.projectBoxClick = this.projectBoxClick.bind(this);
+  }
+
+  projectBoxClick(e, i){
+    let activeBox = this.state.activeBox === i ? -1 : i;
+    this.setState({activeBox: activeBox});
+  }
+
   addProjectBox(repos) {
     const project_box = [];
-    for(let repo of repos){
+    repos.forEach((repo, i)=>{
       project_box.push(
         <ProjectBox
           key={repo['name']}
+          num={i}
+          onClick={this.projectBoxClick}
+          showing={this.state.activeBox === i}
           languages={repo['languagesList']}
           title={repo['name']}
           date={repo['created_at']}
           description={repo['description']}
-          url={repo['url']}
-          projectLink={repo['projectLink']}/>
+          url={repo['html_url']}
+          projectLink={repo['homepage']}/>
       )
-    }
+    })
     return project_box;
   }
 

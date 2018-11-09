@@ -52,6 +52,7 @@ class App extends Component {
           'https://sites.google.com/site/josuerojasportfolio/python/migration-of-language-and-income'];
         window.location.hash = '#home';
         window.location = random_links[Math.floor(Math.random() * random_links.length)];
+        // fall through
       default:
         return (<SimpleCard
           social={

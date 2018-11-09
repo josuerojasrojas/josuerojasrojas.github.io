@@ -18,14 +18,6 @@ class Dash extends Component{
 }
 
 export default class ProjectBox extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      showing: false,
-    }
-    this.activeBox = this.activeBox.bind(this);
-  }
-
   makeLangCircles(langs){
     let langCir = [];
     for(let l of langs){
@@ -34,20 +26,13 @@ export default class ProjectBox extends Component{
     return langCir;
   }
 
-  activeBox(e){
-    this.setState({
-      showing: !this.state.showing,
-    })
-  }
-
   render(){
-    const projectLink = this.props.projectLink !== '#' ? <a href={this.props.projectLink} target='_blank' className='icon-border link'><div className='icon'></div></a> : '';
-    const githubLink = this.props.url !== '#' ? (<a href={this.props.url} target='_blank' className='icon-border octo'><div className='icon'></div></a>) : '';
-
+    const projectLink = this.props.projectLink ? <a rel="noopener noreferrer" href={this.props.projectLink} target='_blank' className='icon-border link'><div className='icon'></div></a> : '';
+    const githubLink = this.props.url ? (<a rel="noopener noreferrer" href={this.props.url} target='_blank' className='icon-border octo'><div className='icon'></div></a>) : '';
 
     const date = new Date(this.props.date)
     return (
-      <div className={'project-box ' + (this.state.showing ? ' showing': '')} onClick={this.activeBox} >
+      <div className={'project-box ' + (this.props.showing ? ' showing': '')} onClick={(e)=>{this.props.onClick(e, this.props.num)}} >
         <div className='information'>
           <div className='languages'>
             {this.makeLangCircles(this.props.languages)}
@@ -62,7 +47,7 @@ export default class ProjectBox extends Component{
             <p>{this.props.description}</p>
           </div>
         </div>
-        <Dash isActive={this.state.showing}/>
+        <Dash isActive={this.props.showing}/>
         <div className='show-box'>
           {githubLink}
           {projectLink}

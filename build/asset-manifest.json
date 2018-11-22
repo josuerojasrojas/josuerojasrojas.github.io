@@ -1,7 +1,7 @@
 {
-  "main.css": "/build/static/css/main.012cc948.chunk.css",
-  "main.js": "/build/static/js/main.52a134d7.chunk.js",
-  "main.js.map": "/build/static/js/main.52a134d7.chunk.js.map",
+  "main.css": "/build/static/css/main.c87f72a1.chunk.css",
+  "main.js": "/build/static/js/main.4c3dc095.chunk.js",
+  "main.js.map": "/build/static/js/main.4c3dc095.chunk.js.map",
   "static/js/1.1b2db2a1.chunk.js": "/build/static/js/1.1b2db2a1.chunk.js",
   "static/js/1.1b2db2a1.chunk.js.map": "/build/static/js/1.1b2db2a1.chunk.js.map",
   "runtime~main.js": "/build/static/js/runtime~main.3923d73d.js",
@@ -13,8 +13,8 @@
   "static/media/Chevron-Button.css": "/build/static/media/chevron-down.3bcf0dee.svg",
   "static/media/ProjectBox.css": "/build/static/media/link.747894cd.svg",
   "static/media/Instagram_simple_icon.svg": "/build/static/media/Instagram_simple_icon.c9358d1c.svg",
-  "static/css/main.012cc948.chunk.css.map": "/build/static/css/main.012cc948.chunk.css.map",
+  "static/css/main.c87f72a1.chunk.css.map": "/build/static/css/main.c87f72a1.chunk.css.map",
   "index.html": "/build/index.html",
-  "precache-manifest.7c400f30c8aca4253a31dabc2a871623.js": "/build/precache-manifest.7c400f30c8aca4253a31dabc2a871623.js",
+  "precache-manifest.b277fce6dd1bbee0cda4a2882d02cc21.js": "/build/precache-manifest.b277fce6dd1bbee0cda4a2882d02cc21.js",
   "service-worker.js": "/build/service-worker.js"
 }

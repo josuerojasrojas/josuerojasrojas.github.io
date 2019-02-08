@@ -14,23 +14,28 @@ USERNAME_SEARCH = 'josuerojasrojas'
 
 def getPinnedNames():
     r = requests.get('https://github.com/'+USERNAME_SEARCH).content
-    soup = BeautifulSoup(r)
-    span = soup.find_all('span', {'class': 'repo js-repo'})
+    soup = BeautifulSoup(r, features="html.parser")
+    repo_pinned_box = soup.find_all('div', {'class': 'pinned-repo-item-content'})
     pinnedLinks = []
-    for text in span:
-        pinnedLinks.append(text.get_text())
-    return pinnedLinks
+    owners = []
+    for box in repo_pinned_box:
+        span = box.find('span', {'class': 'repo js-repo'})
+        # some pinned repos might not be own by the same user
+        owner = box.find('span', {'class': 'owner text-normal'})
+        owners.append(owner.get_text() if owner else USERNAME_SEARCH);
+        pinnedLinks.append(span.get_text());
+    return (pinnedLinks, owners)
 
 def getSearchablelanguages():
     r = requests.get('https://github.com/'+USERNAME_SEARCH+'?tab=repositories').content
-    soup = BeautifulSoup(r)
+    soup = BeautifulSoup(r, features="html.parser")
     container = soup.find_all('div', {'class': 'select-menu d-inline-block js-menu-container js-select-menu select-menu-modal-right'})[1].find_all('span', {'class':'select-menu-item-text js-select-button-text'})#should be the second one...
     langs = []
     for input in container:
         langs.append(input.get_text())
     return langs
 
-findList = getPinnedNames() #repos to find
+findList, ownerList = getPinnedNames() #repos to find
 basicInfo = requests.get('https://api.github.com/users/'+USERNAME_SEARCH,auth=('josuerojasrojas',os.environ['gittoken'])).json()
 # repos = requests.get('https://api.github.com/users/'+USERNAME_SEARCH+'/repos',auth=('josuerojasrojas',os.environ['gittoken'])).json()
 allLanguages = getSearchablelanguages()
@@ -50,8 +55,8 @@ def getInfo():
     repoJson = []
     # info filter are just simple filter from the json data we get, if the information needs to be cleaned or modified then it is done after
     info_filter = ['name', 'html_url', 'description', 'created_at', 'homepage']
-    for repo_name in findList:
-        repo = requests.get('https://api.github.com/repos/'+USERNAME_SEARCH+'/'+repo_name,auth=('josuerojasrojas',os.environ['gittoken'])).json()
+    for repo_name, repo_owner in zip(findList, ownerList):
+        repo = requests.get('https://api.github.com/repos/'+repo_owner+'/'+repo_name,auth=('josuerojasrojas',os.environ['gittoken'])).json()
         singleJson = {}
         languagesInfo = languagePercent(requests.get(repo['languages_url'],auth=('josuerojasrojas',os.environ['gittoken'])).json()) if repo['languages_url'] else []
         singleJson['languages'] = languagesInfo
@@ -79,6 +84,7 @@ def main():
     with open('data.json','w') as jsonfile:
         json.dump(organizeData(repoJson), jsonfile)
     os.chdir(os.getcwd())
+    print 'Done'
     # os.system('cd '+ os.getcwd()+ '; json2yaml data.json > data.yml') #it's easier to use so i've heard, plus it looks pretty
 
 main()

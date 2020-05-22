@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "0b05b4f78b885d8fbc328c54f58f897b",
-    "url": "/build/static/media/Facebook_simple_icon.0b05b4f7.svg"
+    "revision": "f0035cefa756a05a1f03adb98ed1212b",
+    "url": "/build/static/media/LinkedIn_simple_icon.f0035cef.svg"
   },
   {
-    "revision": "2fdfaf97ed1e6e113830",
-    "url": "/build/static/css/main.f5c19505.chunk.css"
+    "revision": "f47abb438e2ed9513d17",
+    "url": "/build/static/css/main.75dbdad7.chunk.css"
   },
   {
-    "revision": "d9fc8a043732d7b72e4f",
-    "url": "/build/static/js/1.d9fc8a04.chunk.js"
+    "revision": "b4d8ef2cb7791815737b",
+    "url": "/build/static/js/runtime~main.9df7376b.js"
   },
   {
-    "revision": "3923d73d01a4271659cc",
-    "url": "/build/static/js/runtime~main.3923d73d.js"
+    "revision": "1814d7653a25fedc97a6",
+    "url": "/build/static/js/2.5bdf88d6.chunk.js"
   },
   {
     "revision": "3eda32ad761473e0e980f46fad9042be",
@@ -24,12 +24,16 @@ self.__precacheManifest = [
     "url": "/build/static/media/Instagram_simple_icon.c9358d1c.svg"
   },
   {
-    "revision": "2fdfaf97ed1e6e113830",
-    "url": "/build/static/js/main.2fdfaf97.chunk.js"
+    "revision": "0b05b4f78b885d8fbc328c54f58f897b",
+    "url": "/build/static/media/Facebook_simple_icon.0b05b4f7.svg"
   },
   {
-    "revision": "f0035cefa756a05a1f03adb98ed1212b",
-    "url": "/build/static/media/LinkedIn_simple_icon.f0035cef.svg"
+    "revision": "f47abb438e2ed9513d17",
+    "url": "/build/static/js/main.30309a97.chunk.js"
+  },
+  {
+    "revision": "43449f1c48de00f0ef903fcacf487626",
+    "url": "/build/static/media/twitter.43449f1c.svg"
   },
   {
     "revision": "80ddc2a3a73ac29411f657794f6c61d6",
@@ -48,7 +52,7 @@ self.__precacheManifest = [
     "url": "/build/static/media/link.747894cd.svg"
   },
   {
-    "revision": "d28f806d896bf3ff5ba3e7a8aebf3d75",
+    "revision": "7532f9d5bdbda95839c99c723ff376e3",
     "url": "/build/index.html"
   }
 ];
